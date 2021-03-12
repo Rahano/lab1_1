@@ -34,12 +34,12 @@ public class OfferItem {
         this.quantity = quantity;
         this.discount = new Discount(discountCause, new Money(currency, discount));
 
-        BigDecimal discountValue = new BigDecimal(0);
+        Money discountValue = new Money(currency, new BigDecimal(0));
         if (discount != null) {
-            discountValue = discountValue.subtract(discount);
+            discountValue = discountValue.subtract(this.discount.getValue());
         }
 
-        this.totalCost = new Money(currency, productPrice.multiply(new BigDecimal(quantity)).subtract(discountValue));
+        this.totalCost = new Money(currency, productPrice).multiply(new BigDecimal(quantity)).subtract(this.discount.getValue());
     }
 
     public String getProductId() {

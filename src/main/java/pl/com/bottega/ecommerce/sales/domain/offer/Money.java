@@ -18,16 +18,17 @@ public class Money {
         return currency;
     }
 
-    public void setCurrency(String currency) {
-        this.currency = currency;
-    }
-
     public BigDecimal getAmount() {
+
         return amount;
     }
 
-    public void setAmount(BigDecimal amount) {
-        this.amount = amount;
+    public Money subtract(Money otherMoney){
+        return new Money(currency, this.amount.subtract(otherMoney.getAmount()));
+    }
+
+    public Money multiply(BigDecimal value){
+        return new Money(currency, amount.multiply(value));
     }
 
     @Override public boolean equals(Object o) {
